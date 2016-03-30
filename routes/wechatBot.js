@@ -23,7 +23,7 @@ router.use('/', wechat(token).text(function(message, req, res, next) {
 	// MsgType: 'text',
 	// Content: 'http',
 	// MsgId: '5837397576500011341' }
-	var keyArray = ['你好', '约吗'];
+	var keyArray = ['你好', '约吗', '芝麻开门'];
 	var content = message.Content;
 	var keyIndex = keyArray.indexOf(content);
 	switch (keyIndex) {
@@ -41,6 +41,15 @@ router.use('/', wechat(token).text(function(message, req, res, next) {
 				res.reply({
 					type: "text",
 					content: '不约，不约，叔叔我们不约！'
+				});
+
+			}
+			break;
+		case 2:
+			{
+				res.reply({
+					type: "text",
+					content: '吱~吱~~吱~~~ “请进！” <a href="http://xusijiawork.leanapp.cn">点击进入</a>'
 				});
 
 			}
