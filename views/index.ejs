@@ -54,13 +54,27 @@
 			</form>
 			<div class="mui-content-padded" style="margin-top: 25px;">
 				<button id='login' class="mui-btn mui-btn-block mui-btn-primary" style="padding: 10px;">登录</button>
-				<div class="link-area"><a id='reg' href="javascript:void(0);">注册账号</a> <span class="spliter">|</span> <a id='forgetPassword' href="javascript:void(0);">忘记密码</a>
+				<div class="link-area"><a id='reg'>注册账号</a> <span class="spliter">|</span> <a id='forgetPassword'>忘记密码</a>
 				</div>
 			</div>
 		</div>
 		<script src="js/mui.min.js"></script>
 		<script type="text/javascript">
 			mui.init({});
+			var regButton = document.getElementById('reg');
+			regButton.addEventListener('tap', function(event) {
+				mui.alert('暂不提供注册功能噢，找管理员要账号吧~',
+					'闲人免进——的说');
+			}, false);
+			var forgetPasswordButton = document.getElementById('forgetPassword');
+			forgetPasswordButton.addEventListener('tap', function(event) {
+				mui.alert('密码也能忘？！求管理员帮你改吧。。。', '长点记性哈……');
+			}, false);
+			var loginButton = document.getElementById('login');
+			loginButton.addEventListener('tap', function(event) {
+				mui.alert('今天没时间做了，明天再说啦~',
+					'还没做啦');
+			}, false);
 		</script>
 
 	</body>
