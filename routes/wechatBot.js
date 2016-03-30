@@ -49,7 +49,7 @@ router.use('/', wechat(token).text(function(message, req, res, next) {
 			{
 				res.reply({
 					type: "text",
-					content: '吱~吱~~吱~~~ “请进！” <a href="http://xusijiawork.leanapp.cn">点击进入</a>'
+					content: '吱~~~ “请进！” <a href="http://xusijiawork.leanapp.cn">点击进入</a>'
 				});
 
 			}
