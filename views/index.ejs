@@ -74,6 +74,16 @@
 			}, false);
 			var loginButton = document.getElementById('login');
 			loginButton.addEventListener('tap', function(event) {
+				AV.Cloud.run('hello', {
+					name: 'dennis'
+				}, {
+					success: function(data) {
+						//调用成功，得到成功的应答data
+					},
+					error: function(err) {
+						//处理调用失败
+					}
+				});
 				AV.Cloud.run('login', {
 					username: document.getElementById('account').value,
 					password: document.getElementById('password').value
