@@ -58,7 +58,9 @@
 				</div>
 			</div>
 		</div>
+		<script src="https://cdn1.lncld.net/static/js/av-mini-0.6.4.js"></script>
 		<script src="js/mui.min.js"></script>
+		<script src="js/app.js"></script>
 		<script type="text/javascript">
 			mui.init({});
 			var regButton = document.getElementById('reg');
@@ -72,8 +74,18 @@
 			}, false);
 			var loginButton = document.getElementById('login');
 			loginButton.addEventListener('tap', function(event) {
-				mui.alert('今天没时间做了，明天再说啦~',
-					'还没做啦');
+				AV.Cloud.run('login', {
+					username: document.getElementById('account').value,
+					password: document.getElementById('password').value
+				}).then(function(result) {
+					console.log(result);
+					mui.alert('登录成功~不过功能还没做好呢:-D',
+						'登录成功');
+				}, function(error) {
+					mui.alert('登录失败~再想想密码是不是错了噢',
+						'登录失败');
+					console.log(error);
+				});
 			}, false);
 		</script>
 
