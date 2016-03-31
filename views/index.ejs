@@ -78,9 +78,10 @@
 					username: document.getElementById('account').value,
 					password: document.getElementById('password').value
 				}).then(function(result) {
-					console.log(result);
-					mui.alert('登录成功~不过功能还没做好呢:-D',
-						'登录成功');
+					//					console.log(result);
+					//					mui.alert('登录成功~不过功能还没做好呢:-D',
+					//						'登录成功');
+					window.location.href = 'main';
 				}, function(error) {
 					mui.alert('登录失败~再想想密码是不是错了噢',
 						'登录失败');

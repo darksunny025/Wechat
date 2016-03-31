@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>
+			<%= appName %>
+		</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="css/mui.min.css">
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title"><%= appName %></h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view mui-grid-view mui-grid-9">
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+					<a id="joke" href="#">
+						<span class="mui-icon mui-icon-navigate"><span class="mui-badge">5</span></span>
+						<div class="mui-media-body">点我点我</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+					<a href="#">
+						<span class="mui-icon mui-icon-spinner-cycle "></span>
+						<div class="mui-media-body">神马都木有</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+					<a href="#">
+						<span class="mui-icon mui-icon-spinner-cycle "></span>
+						<div class="mui-media-body">神马都木有</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+					<a href="#">
+						<span class="mui-icon mui-icon-spinner-cycle "></span>
+						<div class="mui-media-body">神马都木有</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+					<a href="#">
+						<span class="mui-icon mui-icon-spinner-cycle "></span>
+						<div class="mui-media-body">神马都木有</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+					<a href="#">
+						<span class="mui-icon mui-icon-spinner-cycle "></span>
+						<div class="mui-media-body">神马都木有</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+					<a href="#">
+						<span class="mui-icon mui-icon-spinner-cycle "></span>
+						<div class="mui-media-body">神马都木有</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+					<a href="#">
+						<span class="mui-icon mui-icon-spinner-cycle "></span>
+						<div class="mui-media-body">神马都木有</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+					<a href="#">
+						<span class="mui-icon mui-icon-spinner-cycle "></span>
+						<div class="mui-media-body">神马都木有</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script src="https://cdn1.lncld.net/static/js/av-mini-0.6.4.js"></script>
+	<script src="js/mui.min.js"></script>
+	<script src="js/app.js"></script>
+	<script>
+		mui.init({});
+		var jokeButton = document.getElementById('joke');
+		jokeButton.addEventListener('tap', function(event) {
+			mui.alert('噗哈哈~被骗了吧，都还没想好做什么功能呢！',
+				'大笨蛋！~');
+		}, false);
+	</script>
+
+</html>

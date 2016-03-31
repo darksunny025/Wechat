@@ -52,6 +52,13 @@ app.get('/', function(req, res) {
 	});
 });
 
+app.get('/main', function(req, res) {
+	res.render('main', {
+		currentTime: new Date(),
+		appName: '包子的杂货铺'
+	});
+});
+
 // 可以将一类的路由单独保存在一个文件中
 app.use('/wechat', wechat);
 
