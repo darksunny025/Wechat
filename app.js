@@ -53,10 +53,84 @@ app.get('/', function(req, res) {
 });
 
 app.get('/main', function(req, res) {
-	res.render('main', {
-		currentTime: new Date(),
-		appName: '包子的杂货铺'
-	});
+	var currentUser = AV.User.current();
+	if (currentUser) {
+		res.render('main', {
+			currentTime: new Date(),
+			appName: '包子的杂货铺'
+		});
+	} else {
+		res.render('index', {
+			currentTime: new Date(),
+			appName: '包子的杂货铺'
+		});
+	}
+});
+
+// 服务端代码，基于 Node.js、Express
+var AV = require('leanengine');
+// 服务端需要使用 connect-busboy（通过 npm install 安装）
+var busboy = require('connect-busboy');
+// 使用这个中间件
+app.use(busboy());
+
+// 上传接口方法（使用时自行配置到 router 中）
+function uploadFile(req, res) {
+	if (req.busboy) {
+		var base64data = [];
+		var pubFileName = '';
+		var pubMimeType = '';
+		req.busboy.on('file', (fieldname, file, fileName, encoding, mimeType) => {
+			var buffer = '';
+			pubFileName = fileName;
+			pubMimeType = mimeType;
+			file.setEncoding('base64');
+			file.on('data', function(data) {
+				buffer += data;
+			}).on('end', function() {
+				base64data.push(buffer);
+			});
+		}).on('finish', function() {
+			var f = new AV.File(pubFileName, {
+				// 仅上传第一个文件（多个文件循环创建）
+				base64: base64data[0]
+			});
+			try {
+				f.save().then(function(fileObj) {
+					// 向客户端返回数据
+					res.send({
+						fileId: fileObj.id,
+						fileName: fileObj.name(),
+						mimeType: fileObj.metaData().mime_type,
+						fileUrl: fileObj.url()
+					});
+				});
+			} catch (err) {
+				console.log('uploadFile - ' + err);
+				res.status(502);
+			}
+		})
+		req.pipe(req.busboy);
+	} else {
+		console.log('uploadFile - busboy undefined.');
+		res.status(502);
+	}
+};
+
+app.post('/uploadPicInterface', uploadFile);
+
+app.get('/uploadPic', function(req, res) {
+	var currentUser = AV.User.current();
+	if (currentUser) {
+		res.render('uploadPic', {
+			title: '上传图片'
+		});
+	} else {
+		res.render('index', {
+			currentTime: new Date(),
+			appName: '包子的杂货铺'
+		});
+	}
 });
 
 // 可以将一类的路由单独保存在一个文件中

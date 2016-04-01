@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>
+			<%= title %>
+		</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="css/mui.min.css">
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title"><%= title %></h1>
+		</header>
+		<div class="mui-content">
+			<!-- 页面元素（限制上传为图片类型，使用时可自行修改 accept 属性）-->
+			<form id="upload-file-form" class="upload" enctype="multipart/form-data">
+				<input name="attachment" type="file" accept="image/gif, image/jpeg, image/png">
+			</form>
+		</div>
+	</body>
+	<script src="https://cdn1.lncld.net/static/js/av-mini-0.6.4.js"></script>
+	<script src="js/mui.min.js"></script>
+	<script src="js/app.js"></script>
+	<script>
+		mui.init({});
+
+		function uploadPhoto() {
+			var uploadFormDom = document.querySelector('#upload-file-form');
+			var uploadInputDom = uploadFormDom.querySelector('input[type=file]');
+			// 获取浏览器 file 对象
+			var files = uploadInputDom[0].files;
+			// 创建 formData 对象
+			var formData = new window.FormData(uploadFormDom[0]);
+			if (files.length) {
+				$.ajax({
+					// 注意，这个 url 地址是一个例子，真实使用时需替换为自己的上传接口 url
+					url: 'uploadPicInterface',
+					method: 'post',
+					data: formData,
+					processData: false,
+					contentType: false
+				}).then((data) => {
+					// 上传成功，服务端设置返回
+					console.log(data);
+				});
+			}
+		};
+	</script>
+
+</html>

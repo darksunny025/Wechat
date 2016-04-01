@@ -27,9 +27,9 @@
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-					<a href="#">
-						<span class="mui-icon mui-icon-spinner-cycle "></span>
-						<div class="mui-media-body">神马都木有</div>
+					<a id="uploadPic" href="#">
+						<span class="mui-icon mui-icon-upload "></span>
+						<div class="mui-media-body">上传图片</div>
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
@@ -86,6 +86,10 @@
 		jokeButton.addEventListener('tap', function(event) {
 			mui.alert('噗哈哈~被骗了吧，都还没想好做什么功能呢！',
 				'大笨蛋！~');
+		}, false);
+		var uploadPicButton = document.getElementById('uploadPic');
+		uploadPicButton.addEventListener('tap', function(event) {
+			window.location.href = 'uploadPic';
 		}, false);
 	</script>
 
