@@ -80,7 +80,7 @@ function uploadFile(req, res) {
 		var base64data = [];
 		var pubFileName = '';
 		var pubMimeType = '';
-		req.busboy.on('file', (fieldname, file, fileName, encoding, mimeType) => {
+		req.busboy.on('file', function(fieldname, file, fileName, encoding, mimeType) {
 			var buffer = '';
 			pubFileName = fileName;
 			pubMimeType = mimeType;
