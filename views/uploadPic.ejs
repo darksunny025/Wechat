@@ -38,9 +38,9 @@
 			var uploadFormDom = document.querySelector('#upload-file-form');
 			var uploadInputDom = uploadFormDom.querySelector('input[type=file]');
 			// 获取浏览器 file 对象
-			var files = uploadInputDom[0].files;
+			var files = uploadInputDom.files;
 			// 创建 formData 对象
-			var formData = new window.FormData(uploadFormDom[0]);
+			var formData = new window.FormData(uploadFormDom);
 			if (files.length) {
 				mui.ajax({
 					url: 'uploadPicInterface',
