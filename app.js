@@ -21,6 +21,15 @@ app.use(AV.Cloud.CookieSession({
 	fetchUser: true
 }));
 
+var bodyParser = require('body-parser');
+var multer = require('multer');
+
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({
+	extended: true
+})); // for parsing application/x-www-form-urlencoded
+app.use(multer()); // for parsing multipart/form-data
+
 /**
  * 登录
  */
@@ -38,9 +47,9 @@ AV.Cloud.define('login', function(req, res) {
 
 app.post('/login', function(req, res) {
 	//	console.log('params : ' + req.params.username);
-	//	console.log('body : ' + req.body.username);
-	console.log('query : ' + req.query.username);
-	AV.User.logIn(req.query.username, req.query.password).then(function(user) {
+	console.log('body : ' + req.body.username);
+	//	console.log('query : ' + req.query.username);
+	AV.User.logIn(req.body.username, req.body.password).then(function(user) {
 		//登录成功，AV.Cloud.CookieSession 会自动将登录用户信息存储到 cookie
 		console.log('signin successfully: %j', user);
 		res.json({
