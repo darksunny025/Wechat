@@ -74,18 +74,43 @@
 			}, false);
 			var loginButton = document.getElementById('login');
 			loginButton.addEventListener('tap', function(event) {
-				AV.Cloud.run('login', {
-					username: document.getElementById('account').value,
-					password: document.getElementById('password').value
-				}).then(function(result) {
-					//					console.log(result);
-					//					mui.alert('登录成功~不过功能还没做好呢:-D',
-					//						'登录成功');
-					window.location.href = 'main';
-				}, function(error) {
-					mui.alert('登录失败~再想想密码是不是错了噢',
-						'登录失败');
-					console.log(error);
+				//				AV.Cloud.run('login', {
+				//					username: document.getElementById('account').value,
+				//					password: document.getElementById('password').value
+				//				}).then(function(result) {
+				//					//					console.log(result);
+				//					//					mui.alert('登录成功~不过功能还没做好呢:-D',
+				//					//						'登录成功');
+				//					window.location.href = 'main';
+				//				}, function(error) {
+				//					mui.alert('登录失败~再想想密码是不是错了噢',
+				//						'登录失败');
+				//					console.log(error);
+				//				});
+				mui.ajax('login', {
+					data: {
+						username: document.getElementById('account').value,
+						password: document.getElementById('password').value
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						//服务器返回响应，根据响应结果，分析是否登录成功；
+						if (data.success) {
+							window.location.href = 'main';
+						} else {
+							mui.alert('登录失败~再想想密码是不是错了噢',
+								'登录失败');
+							console.log(error);
+						}
+					},
+					error: function(xhr, type, errorThrown) {
+						//异常处理；
+						mui.alert('网络不给力啊……',
+							'登录失败');
+						console.log(type);
+					}
 				});
 			}, false);
 		</script>

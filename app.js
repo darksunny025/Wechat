@@ -15,7 +15,11 @@ var busboy = require('connect-busboy');
 // 使用这个中间件
 app.use(busboy());
 // 加载 cookieSession 以支持 AV.User 的会话状态
-app.use(AV.Cloud.CookieSession({ secret: 'my secret', maxAge: 3600000, fetchUser: true }));
+app.use(AV.Cloud.CookieSession({
+	secret: 'my secret',
+	maxAge: 3600000,
+	fetchUser: true
+}));
 
 /**
  * 登录
@@ -29,6 +33,20 @@ AV.Cloud.define('login', function(req, res) {
 	}, function() {
 		// 失败了
 		res.error('登录失败');
+	});
+});
+
+app.post('/login', function(req, res) {
+	AV.User.logIn(req.body.username, req.body.password).then(function(user) {
+		//登录成功，AV.Cloud.CookieSession 会自动将登录用户信息存储到 cookie
+		console.log('signin successfully: %j', user);
+		res.json({
+			success: true
+		});
+	}, function(error) {
+		res.json({
+			success: false
+		});
 	});
 });
 
