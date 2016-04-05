@@ -17,6 +17,21 @@ app.use(busboy());
 // 加载 cookieSession 以支持 AV.User 的会话状态
 app.use(AV.Cloud.CookieSession({ secret: 'my secret', maxAge: 3600000, fetchUser: true }));
 
+/**
+ * 登录
+ */
+AV.Cloud.define('login', function(req, res) {
+	var username = req.params.username;
+	var password = req.params.password;
+	AV.User.logIn(username, password).then(function() {
+		// 成功了，现在可以做其他事情了
+		res.success('登录成功');
+	}, function() {
+		// 失败了
+		res.error('登录失败');
+	});
+});
+
 // 设置 view 引擎
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
