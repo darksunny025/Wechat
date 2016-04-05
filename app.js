@@ -8,6 +8,12 @@ var wechat = require('./routes/wechatBot');
 var cloud = require('./cloud');
 
 var app = express();
+// 服务端代码，基于 Node.js、Express
+var AV = require('leanengine');
+// 服务端需要使用 connect-busboy（通过 npm install 安装）
+var busboy = require('connect-busboy');
+// 使用这个中间件
+app.use(busboy());
 // 加载 cookieSession 以支持 AV.User 的会话状态
 app.use(AV.Cloud.CookieSession({ secret: 'my secret', maxAge: 3600000, fetchUser: true }));
 
@@ -68,13 +74,6 @@ app.get('/main', function(req, res) {
 		});
 	}
 });
-
-// 服务端代码，基于 Node.js、Express
-var AV = require('leanengine');
-// 服务端需要使用 connect-busboy（通过 npm install 安装）
-var busboy = require('connect-busboy');
-// 使用这个中间件
-app.use(busboy());
 
 // 上传接口方法（使用时自行配置到 router 中）
 function uploadFile(req, res) {
