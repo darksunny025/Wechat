@@ -29,40 +29,63 @@
 		</div>
 	</body>
 	<script src="https://cdn1.lncld.net/static/js/av-mini-0.6.4.js"></script>
+	<script src="http://code.jquery.com/jquery-2.2.2.min.js"></script>
 	<script src="js/mui.min.js"></script>
 	<script src="js/app.js"></script>
 	<script>
 		mui.init({});
-		var mask = mui.createMask();
-
+		//		function uploadPhoto() {
+		//			var uploadFormDom = document.querySelector('#upload-file-form');
+		//			var uploadInputDom = uploadFormDom.querySelector('input[type=file]');
+		//			// 获取浏览器 file 对象
+		//			var files = uploadInputDom.files;
+		//			// 创建 formData 对象
+		//			var formData = new window.FormData(uploadFormDom);
+		//			if (files.length) {
+		//				mui.ajax('uploadPicInterface', {
+		//					data: formData,
+		//					dataType: 'json', //服务器返回json格式数据
+		//					type: 'post', //HTTP请求类型
+		//					timeout: 30000, //超时时间设置为30秒；
+		//					success: function(data) {
+		//						// 上传成功，服务端设置返回
+		//						mui.alert('上传成功！',
+		//							'上传成功');
+		//						console.log(data);
+		//					},
+		//					error: function(xhr, type, errorThrown) {
+		//						//异常处理；
+		//						mui.alert('上传失败……',
+		//							'上传失败');
+		//						console.log(type);
+		//					}
+		//				});
+		//			}
+		//		};
 		function uploadPhoto() {
-			mask.show(); //显示遮罩
-			var uploadFormDom = document.querySelector('#upload-file-form');
-			var uploadInputDom = uploadFormDom.querySelector('input[type=file]');
+			var uploadFormDom = jQuery('#upload-file-form');
+			var uploadInputDom = uploadFormDom.find('input[type=file]');
 			// 获取浏览器 file 对象
-			var files = uploadInputDom.files;
+			var files = uploadInputDom[0].files;
 			// 创建 formData 对象
-			var formData = new window.FormData(uploadFormDom);
+			var formData = new window.FormData(uploadFormDom[0]);
 			if (files.length) {
-				mui.ajax('uploadPicInterface', {
+				jQuery.ajax({
+					url: 'uploadPicInterface',
+					method: 'post',
 					data: formData,
-					dataType: 'json', //服务器返回json格式数据
-					type: 'post', //HTTP请求类型
-					timeout: 60000, //超时时间设置为60秒；
-					success: function(data) {
-						// 上传成功，服务端设置返回
-						mask.close(); //关闭遮罩
-						mui.alert('上传成功！',
-							'上传成功');
-						console.log(data);
-					},
-					error: function(xhr, type, errorThrown) {
-						//异常处理；
-						mask.close(); //关闭遮罩
-						mui.alert('上传失败……',
-							'上传失败');
-						console.log(type);
-					}
+					processData: false,
+					contentType: false
+				}).then(function(data) {
+					// 上传成功，服务端设置返回
+					mui.alert('上传成功！',
+						'上传成功');
+					console.log(data);
+				}, function(error) {
+					//异常处理；
+					mui.alert('上传失败……',
+						'上传失败');
+					console.log(type);
 				});
 			}
 		};
