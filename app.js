@@ -44,8 +44,10 @@ app.post('/login', function(req, res) {
 			success: true
 		});
 	}, function(error) {
+		console.log(error);
 		res.json({
-			success: false
+			success: false,
+			error: error
 		});
 	});
 });
