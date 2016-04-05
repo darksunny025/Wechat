@@ -8,6 +8,8 @@ var wechat = require('./routes/wechatBot');
 var cloud = require('./cloud');
 
 var app = express();
+// 加载 cookieSession 以支持 AV.User 的会话状态
+app.use(AV.Cloud.CookieSession({ secret: 'my secret', maxAge: 3600000, fetchUser: true }));
 
 // 设置 view 引擎
 app.set('views', path.join(__dirname, 'views'));
@@ -53,7 +55,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/main', function(req, res) {
-	var currentUser = AV.User.current();
+	var currentUser = req.AV.user;
 	if (currentUser) {
 		res.render('main', {
 			currentTime: new Date(),
@@ -120,7 +122,7 @@ function uploadFile(req, res) {
 app.post('/uploadPicInterface', uploadFile);
 
 app.get('/uploadPic', function(req, res) {
-	var currentUser = AV.User.current();
+	var currentUser = req.AV.user;
 	if (currentUser) {
 		res.render('uploadPic', {
 			title: '上传图片'
