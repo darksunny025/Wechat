@@ -42,10 +42,10 @@
 			// 创建 formData 对象
 			var formData = new window.FormData(uploadFormDom);
 			if (files.length) {
-				mui.ajax({
-					url: 'uploadPicInterface',
-					method: 'post',
-					data: formData, //HTTP请求类型
+				mui.ajax('uploadPicInterface', {
+					data: formData,
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
 					timeout: 10000, //超时时间设置为10秒；
 					success: function(data) {
 						// 上传成功，服务端设置返回
