@@ -37,7 +37,9 @@ AV.Cloud.define('login', function(req, res) {
 });
 
 app.post('/login', function(req, res) {
-	AV.User.logIn(req.params.username, req.params.password).then(function(user) {
+	console.log('username : ' + req.param('username'));
+	console.log('password : ' + req.param('password'));
+	AV.User.logIn(req.param('username'), req.param('password')).then(function(user) {
 		//登录成功，AV.Cloud.CookieSession 会自动将登录用户信息存储到 cookie
 		console.log('signin successfully: %j', user);
 		res.json({
