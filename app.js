@@ -37,7 +37,7 @@ AV.Cloud.define('login', function(req, res) {
 });
 
 app.post('/login', function(req, res) {
-	AV.User.logIn(req.body.username, req.body.password).then(function(user) {
+	AV.User.logIn(req.param('username'), req.param('password')).then(function(user) {
 		//登录成功，AV.Cloud.CookieSession 会自动将登录用户信息存储到 cookie
 		console.log('signin successfully: %j', user);
 		res.json({
@@ -101,10 +101,7 @@ app.get('/main', function(req, res) {
 			appName: '包子的杂货铺'
 		});
 	} else {
-		res.render('index', {
-			currentTime: new Date(),
-			appName: '包子的杂货铺'
-		});
+		res.redirect('/');
 	}
 });
 
@@ -160,10 +157,7 @@ app.get('/uploadPic', function(req, res) {
 			title: '上传图片'
 		});
 	} else {
-		res.render('index', {
-			currentTime: new Date(),
-			appName: '包子的杂货铺'
-		});
+		res.redirect('/');
 	}
 });
 
