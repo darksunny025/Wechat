@@ -45,10 +45,18 @@
 				mui.ajax({
 					url: 'uploadPicInterface',
 					method: 'post',
-					data: formData
-				}).then(function(data) {
-					// 上传成功，服务端设置返回
-					console.log(data);
+					data: formData, //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						// 上传成功，服务端设置返回
+						console.log(data);
+					},
+					error: function(xhr, type, errorThrown) {
+						//异常处理；
+						mui.alert('网络不给力啊……',
+							'登录失败');
+						console.log(type);
+					}
 				});
 			}
 		};
