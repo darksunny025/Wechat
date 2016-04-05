@@ -20,9 +20,12 @@
 		</header>
 		<div class="mui-content">
 			<!-- 页面元素（限制上传为图片类型，使用时可自行修改 accept 属性）-->
-			<form id="upload-file-form" class="upload" enctype="multipart/form-data">
-				<input name="attachment" type="file" accept="image/gif, image/jpeg, image/png">
+			<form id="upload-file-form" class="upload" enctype="multipart/form-data" style="display: none;">
+				<input id="picFile" name="attachment" type="file" accept="image/gif, image/jpeg, image/png">
 			</form>
+			<div class="mui-content-padded" style="margin-top: 25px;">
+				<button id='uploadBtn' class="mui-btn mui-btn-block mui-btn-primary" style="padding: 10px;">上传图片</button>
+			</div>
 		</div>
 	</body>
 	<script src="https://cdn1.lncld.net/static/js/av-mini-0.6.4.js"></script>
@@ -39,19 +42,23 @@
 			// 创建 formData 对象
 			var formData = new window.FormData(uploadFormDom[0]);
 			if (files.length) {
-				$.ajax({
-					// 注意，这个 url 地址是一个例子，真实使用时需替换为自己的上传接口 url
+				mui.ajax({
 					url: 'uploadPicInterface',
 					method: 'post',
-					data: formData,
-					processData: false,
-					contentType: false
-				}).then((data) => {
+					data: formData
+				}).then(function(data) {
 					// 上传成功，服务端设置返回
 					console.log(data);
 				});
 			}
 		};
+		document.querySelector('#picFile').onchange = function() {
+			uploadPhoto();
+		}
+		var uploadButton = document.getElementById('uploadBtn');
+		uploadButton.addEventListener('tap', function(event) {
+			document.querySelector('#picFile').click();
+		}, false);
 	</script>
 
 </html>
